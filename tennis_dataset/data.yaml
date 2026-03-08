@@ -1,0 +1,6 @@
+path: /Users/yuriy/Documents/Github/Study/od-dc-tennis/tennis_dataset
+train: train/images
+val: valid/images
+
+names:
+  0: tennis_ball

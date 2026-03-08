@@ -1,0 +1,45 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# Model artifacts
+*.pt
+*.onnx
+*.engine
+
+# Training / inference outputs
+runs/
+notebooks/runs/
+*.cache
+
+# Local calibration / temporary assets
+calibration_image.jpg
+data/output/
+
+# Dataset media (keep labels + yaml + classes tracked)
+tennis_dataset/train/
+tennis_dataset/valid/
+tennis_dataset/**/images/
+tennis_dataset/**/videos/
+tennis_dataset/**/*.cache
