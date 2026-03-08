@@ -29,30 +29,30 @@ Shared reusable helpers live in [`notebooks/tracking_utils.py`](notebooks/tracki
 
 The notebook approximates apparent ball diameter in pixels as:
 
-\[
+$$
 d_{px} = \frac{w_{px} + h_{px}}{2}
-\]
+$$
 
 Distance to camera is then estimated as:
 
-\[
+$$
 Z_{cm} = \frac{D_{real} \cdot F_{px}}{d_{px}}
-\]
+$$
 
 Where:
-- \(D_{real}\): real tennis-ball diameter (6.7 cm)
-- \(F_{px}\): camera focal length in pixels
-- \(d_{px}\): observed diameter in pixels
+- $D_{real}$: real tennis-ball diameter (6.7 cm)
+- $F_{px}$: camera focal length in pixels
+- $d_{px}$: observed diameter in pixels
 
 Implemented in `estimate_distance_cm(...)`.
 
 ### 2) Focal-Length Calibration
 
-If ball distance is known during calibration (\(Z_{known}\)), focal length is estimated by rearranging the same formula:
+If ball distance is known during calibration ($Z_{known}$), focal length is estimated by rearranging the same formula:
 
-\[
+$$
 F_{px} = \frac{Z_{known} \cdot d_{px}}{D_{real}}
-\]
+$$
 
 Implemented in `estimate_focal_length_px(...)`.
 
@@ -60,44 +60,44 @@ Implemented in `estimate_focal_length_px(...)`.
 
 Using two consecutive tracked points with timestamps:
 
-\[
+$$
 v_x = \frac{x_t - x_{t-1}}{\Delta t}, \quad
 v_y = \frac{y_t - y_{t-1}}{\Delta t}, \quad
 v_z = \frac{z_t - z_{t-1}}{\Delta t}
-\]
+$$
 
 Image-plane speed:
 
-\[
+$$
 |v|_{px/s} = \sqrt{v_x^2 + v_y^2}
-\]
+$$
 
 Approximate metric speed:
 
-\[
+$$
 |v|_{cm/s} \approx \frac{|v|_{px/s} \cdot Z_{cm}}{F_{px}}
-\]
+$$
 
 ### 4) Rolling Trajectory Prediction With Friction
 
 Future path is predicted iteratively:
 
-\[
+$$
 \mathbf{p}_{k+1} = \mathbf{p}_k + \mathbf{v}_k \cdot \Delta t
-\]
-\[
+$$
+$$
 \mathbf{v}_{k+1} = f \cdot \mathbf{v}_k
-\]
+$$
 
-Where \(f < 1\) is a friction factor (in notebook: `FRICTION = 0.93`).
+Where $f < 1$ is a friction factor (in notebook: `FRICTION = 0.93`).
 
 ### 5) Multi-Track Association + Kalman Smoothing
 
 For recorded video, detections are matched to tracks by nearest predicted position under a distance threshold. Each track uses a Kalman filter with state:
 
-\[
+$$
 [x, y, v_x, v_y]^T
-\]
+$$
 
 This smooths jitter and helps survive short missed detections.
 
